@@ -35,26 +35,59 @@
             opacity: 1;
             visibility: visible;
         }
+        /* Ensure video doesn't overflow its container */
+        #home video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0; /* Behind overlay and text */
+        }
+        #home > div { /* Target direct children divs (overlay and content container) */
+             position: relative;
+             z-index: 1; /* Ensure overlay and text are above video */
+        }
+        /* Style adjustments for Square form elements to fit theme */
+        #popup-form input[type="email"] {
+            font-family: 'Inter', sans-serif; /* Match body font */
+            /* Use Tailwind classes for consistency if possible, but inline styles are provided by Square */
+        }
+         #popup-form button[type="submit"] {
+             font-family: 'Inter', sans-serif; /* Match body font */
+             font-weight: 500; /* Match Tailwind medium */
+             /* Override Square's background color with Tailwind pink */
+             background-color: #db2777 !important; /* Tailwind pink-600 */
+             border-radius: 0.375rem !important; /* Tailwind rounded-lg */
+             padding-left: 1rem !important; /* Tailwind px-4 */
+             padding-right: 1rem !important; /* Tailwind px-4 */
+             height: 40px; /* Keep height */
+             transition: background-color 0.2s ease-in-out; /* Add transition */
+        }
+        #popup-form button[type="submit"]:hover {
+             background-color: #be185d !important; /* Tailwind pink-700 */
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-indigo-600 hover:text-indigo-800">Sip 'n Graze Studio</a>
-
+            <a href="#" class="text-2xl font-bold text-pink-600 hover:text-pink-800">Sip 'n Graze Studio</a>
             <div class="hidden md:flex space-x-6">
-                <a href="#home" class="text-gray-600 hover:text-indigo-600">Home</a>
-                <a href="#classes" class="text-gray-600 hover:text-indigo-600">Classes</a>
-                <a href="#about" class="text-gray-600 hover:text-indigo-600">About</a>
-                <a href="#gallery" class="text-gray-600 hover:text-indigo-600">Gallery</a>
-                <a href="#contact" class="text-gray-600 hover:text-indigo-600">Contact</a>
+                <a href="#home" class="text-gray-600 hover:text-pink-600">Home</a>
+                <a href="#classes" class="text-gray-600 hover:text-pink-600">Classes</a>
+                <a href="#about" class="text-gray-600 hover:text-pink-600">About</a>
+                <a href="#gallery" class="text-gray-600 hover:text-pink-600">Gallery</a>
+                <a href="#contact" class="text-gray-600 hover:text-pink-600">Contact</a>
             </div>
-
-            <a href="#classes" class="hidden md:inline-block bg-indigo-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                View Schedule
+            <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="hidden md:inline-block bg-pink-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                Book a Class
             </a>
-
             <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -62,23 +95,29 @@
             </button>
         </nav>
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
-             <a href="#home" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-indigo-600">Home</a>
-             <a href="#classes" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-indigo-600">Classes</a>
-             <a href="#about" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-indigo-600">About</a>
-             <a href="#gallery" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-indigo-600">Gallery</a>
-             <a href="#contact" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-indigo-600">Contact</a>
-             <a href="#classes" class="block px-6 py-3 bg-indigo-50 text-indigo-700 font-medium hover:bg-indigo-100">View Schedule</a>
+             <a href="#home" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Home</a>
+             <a href="#classes" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Classes</a>
+             <a href="#about" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">About</a>
+             <a href="#gallery" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Gallery</a>
+             <a href="#contact" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Contact</a>
+             <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="block px-6 py-3 bg-pink-50 text-pink-700 font-medium hover:bg-pink-100">Book a Class</a>
         </div>
     </header>
 
     <main>
-
-        <section id="home" class="relative bg-gray-800 text-white py-20 md:py-32 flex items-center justify-center text-center" style="background: url('https://placehold.co/1600x800/6366f1/FFF?text=Sunset+View+%26+Mini+Cows') no-repeat center center; background-size: cover;">
+        <section id="home" class="relative text-white py-20 md:py-32 flex items-center justify-center text-center overflow-hidden min-h-[60vh] md:min-h-[80vh]">
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                 <div class="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                    <p>Background video unavailable.</p>
+                 </div>
+            </video>
             <div class="absolute inset-0 bg-black opacity-50"></div>
             <div class="relative z-10 container mx-auto px-6">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4">Paint with a View (and Mini Cows!)</h1>
                 <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Experience Sip 'n Graze Studio at Hillcrest Farms. Enjoy panoramic mountain views and adorable mini highland cows as you paint the sunset.</p>
-                <a href="#classes" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
+                <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-pink-500">
                     Find Your Class
                 </a>
             </div>
@@ -88,63 +127,61 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Classes & Workshops</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                        <img src="https://placehold.co/600x400/a5b4fc/374151?text=Sunset+Painting" alt="Sunset Painting Class" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
+                        <img src="https://placehold.co/600x400/fbcfe8/4a044e?text=Wildflower+Painting" alt="Acrylic painting of colorful wildflowers in a field" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Sunset Painting at the Farm</h3>
+                            <h3 class="text-xl font-semibold mb-2">Wildflower Meadow Painting</h3>
                             <p class="text-gray-600 mb-4 text-sm">Sun, May 25th, 2025 | 5:45 PM - 8:45 PM</p>
-                            <p class="text-gray-700 mb-4">Join our first class! Capture the stunning mountain sunset with acrylics as the mini cows graze nearby.</p>
+                            <p class="text-gray-700 mb-4">Paint a vibrant field of wildflowers using acrylics, inspired by the beauty around Hillcrest Farms.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-indigo-600">$49.99</span>
-                                <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <span class="text-lg font-bold text-pink-600">$49.99</span>
+                                <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                     Register Now
-                                    </a>
+                                </a>
                             </div>
                         </div>
                     </div>
-
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                        <img src="https://placehold.co/600x400/818cf8/374151?text=Mini+Cow+Art" alt="Painting Class 2" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
+                         <img src="https://placehold.co/600x400/f9a8d4/4a044e?text=Bee+%26+Lavender" alt="Painting of a bee on lavender flowers" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Mini Highland Cow Portrait</h3>
-                            <p class="text-gray-600 mb-4 text-sm">Sat, June 7th, 2025 | 2:00 PM - 5:00 PM</p>
-                            <p class="text-gray-700 mb-4">Paint our adorable mini highland residents! Guided instruction provided.</p>
+                            <h3 class="text-xl font-semibold mb-2">Bee & Lavender Painting</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Date: Coming Soon!</p>
+                            <p class="text-gray-700 mb-4">Capture the charm of summer with this delightful bee and lavender painting class.</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-indigo-600">$90</span> <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <span class="text-lg font-bold text-pink-600">$49.99</span>
+                                <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                     Register Now
-                                    </a>
+                                </a>
                             </div>
                         </div>
                     </div>
-
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                        <img src="https://placehold.co/600x400/6366f1/ffffff?text=Mountain+View+Class" alt="Painting Class 3" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
+                         <img src="https://placehold.co/600x400/f472b6/ffffff?text=Monstera+Plant" alt="Painting of a green Monstera plant leaf" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Panoramic Mountain Views</h3>
-                             <p class="text-gray-600 mb-4 text-sm">Sun, June 8th, 2025 | 5:45 PM - 8:45 PM</p>
-                            <p class="text-gray-700 mb-4">Learn techniques to capture the depth and beauty of the mountain landscape at sunset.</p>
+                            <h3 class="text-xl font-semibold mb-2">Monstera Leaf Painting</h3>
+                             <p class="text-gray-600 mb-4 text-sm">Date: Coming Soon!</p>
+                             <p class="text-gray-700 mb-4">Learn to paint the iconic, lush leaves of a Monstera plant in this relaxing session.</p>
                              <div class="flex justify-between items-center">
-                                <span class="text-lg font-bold text-indigo-600">$85</span> <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <span class="text-lg font-bold text-pink-600">$49.99</span>
+                                <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                     Register Now
-                                    </a>
+                                </a>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="text-center mt-12">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-lg">
+                    <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:text-pink-800 font-medium text-lg">
                         View Full Class Calendar &rarr;
-                        </a>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="py-16 md:py-24 bg-indigo-50">
+        <section id="about" class="py-16 md:py-24 bg-pink-50">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
-                     <img src="https://placehold.co/600x500/c7d2fe/374151?text=Ella+or+Hillcrest+Farms" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" onerror="this.onerror=null; this.src='https://placehold.co/600x500/cccccc/333333?text=Image+Not+Found';">
+                     <img src="https://placehold.co/600x500/fce7f3/4a044e?text=Ella+or+Hillcrest+Farms" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" onerror="this.onerror=null; this.src='https://placehold.co/600x500/cccccc/333333?text=Image+Not+Found';">
                 </div>
                 <div class="md:w-1/2 text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Welcome to Sip 'n Graze Studio</h2>
@@ -154,9 +191,9 @@
                     <p class="text-gray-700 mb-8 leading-relaxed">
                         Our classes, often timed with the sunset, provide a relaxing and inspiring atmosphere for all skill levels. Join us for an unforgettable artistic adventure.
                     </p>
-                    <a href="#" class="inline-block bg-white text-indigo-600 px-6 py-3 rounded-lg font-medium border border-indigo-200 hover:bg-indigo-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-50 focus:ring-indigo-500">
+                    <a href="#" class="inline-block bg-white text-pink-600 px-6 py-3 rounded-lg font-medium border border-pink-200 hover:bg-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-pink-50 focus:ring-pink-500">
                         Learn More About Us
-                        </a>
+                    </a>
                 </div>
             </div>
         </section>
@@ -165,16 +202,16 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Studio Moments & Creations</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <img src="https://placehold.co/300x300/e0e7ff/374151?text=Art+1" alt="Student Artwork 1" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/c7d2fe/374151?text=Art+2" alt="Student Artwork 2" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/a5b4fc/374151?text=View" alt="Studio View" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/818cf8/ffffff?text=Cow" alt="Mini Highland Cow" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/6366f1/ffffff?text=Sunset" alt="Sunset Class" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="https://placehold.co/300x300/fce7f3/4a044e?text=Art+1" alt="Student Artwork 1" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="https://placehold.co/300x300/fbcfe8/4a044e?text=Art+2" alt="Student Artwork 2" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="https://placehold.co/300x300/f9a8d4/4a044e?text=View" alt="Studio View" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="https://placehold.co/300x300/f472b6/ffffff?text=Cow" alt="Mini Highland Cow" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="https://placehold.co/300x300/ec4899/ffffff?text=Sunset" alt="Sunset Class" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
                  </div>
                  <div class="text-center mt-12">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-lg">
+                    <a href="#" class="text-pink-600 hover:text-pink-800 font-medium text-lg">
                         View Full Gallery &rarr;
-                        </a>
+                    </a>
                 </div>
             </div>
         </section>
@@ -184,14 +221,13 @@
                  <h2 class="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
                  <p class="text-gray-700 mb-8 max-w-xl mx-auto">Have questions about our classes or want to book a private event at Hillcrest Farms? Reach out!</p>
                  <p class="text-lg font-medium mb-8">
-                     <a href="mailto:hey@sipngrazestudio.com" class="hover:text-indigo-600">hey@sipngrazestudio.com</a>
+                     <a href="mailto:hey@sipngrazestudio.com" class="hover:text-pink-600">hey@sipngrazestudio.com</a>
                  </p>
-                 <a href="mailto:hey@sipngrazestudio.com" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                 <a href="mailto:hey@sipngrazestudio.com" class="inline-block bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-pink-500">
                     Email Us
                  </a>
              </div>
         </section>
-
     </main>
 
     <footer class="bg-gray-800 text-gray-300 py-12">
@@ -235,43 +271,33 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-
-            <h2 id="popup-title" class="text-2xl font-bold text-center mb-4 text-indigo-600">Join Our Herd!</h2>
+            <h2 id="popup-title" class="text-2xl font-bold text-center mb-4 text-pink-600">Join Our Herd!</h2>
             <p class="text-center text-gray-600 mb-6">Sign up for our mailing list and get <strong class="font-semibold">20% OFF</strong> your first class! Be the first to know about new classes and special events.</p>
 
-            <form id="popup-form">
-                <label for="popup-email" class="sr-only">Email Address</label>
-                <input type="email" id="popup-email" name="email" placeholder="Enter your email address" required class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-
-                <button type="submit" class="w-full bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Get My Discount!
-                </button>
+            <form id="popup-form" action="https://squareup.com/outreach/a7GYiX/subscribe" method="POST" target="_blank" class="flex flex-col sm:flex-row items-center justify-center gap-2">
+                <input type="email" name="email_address" placeholder="Your Email Address" required style="height: 40px; padding: 0 16px; font-size: 14px; border: 1px solid #bec3c8; border-radius: 3px; flex-grow: 1; font-family: 'Inter', sans-serif;">
+                <input type="hidden" name="embed" value="true">
+                <button type="submit" style="cursor: pointer; background-color: #546476; color: white; height: 40px; border: 0; border-radius: 3px; font-size: 14px; padding: 0 16px; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-weight: 500; white-space: nowrap;">Join Now</button>
             </form>
-             <p class="text-xs text-gray-500 text-center mt-4">We respect your privacy. Unsubscribe anytime.</p>
+            <p class="text-xs text-gray-500 text-center mt-4">We respect your privacy. Unsubscribe anytime.</p>
         </div>
     </div>
-
 
     <script>
         // --- Mobile Menu Toggle ---
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-
         if (menuButton && mobileMenu) {
             menuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
-
-            // Close mobile menu when a link is clicked
             const mobileLinks = mobileMenu.querySelectorAll('a');
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    // Add smooth scroll for internal links
                     if (link.getAttribute('href').startsWith('#')) {
-                         mobileMenu.classList.add('hidden'); // Hide menu immediately
-                         // Optional: Add smooth scroll behavior here if needed
+                         mobileMenu.classList.add('hidden');
                     } else {
-                         mobileMenu.classList.add('hidden'); // Hide for external links too
+                         mobileMenu.classList.add('hidden');
                     }
                 });
             });
@@ -280,60 +306,46 @@
         // --- Mailing List Popup Logic ---
         const popup = document.getElementById('mailing-list-popup');
         const closeButton = document.getElementById('close-popup-button');
-        const popupForm = document.getElementById('popup-form');
-        const popupShownKey = 'sipAndGrazePopupShown'; // Key for localStorage
-
-        // Function to show the popup
+        const popupForm = document.getElementById('popup-form'); // Reference to the new form
+        const popupShownKey = 'sipAndGrazePopupShown';
         const showPopup = () => {
-            // Only show if it hasn't been shown/closed before in this session/browser
             if (!localStorage.getItem(popupShownKey)) {
                 popup.classList.remove('hidden');
             }
         };
-
-        // Function to hide the popup and set flag
         const hidePopup = () => {
             popup.classList.add('hidden');
-            // Set a flag in localStorage so it doesn't show again
             localStorage.setItem(popupShownKey, 'true');
         };
-
-        // Show popup after a delay (e.g., 5 seconds)
-        const popupDelay = 5000; // 5 seconds in milliseconds
+        const popupDelay = 5000;
         const popupTimer = setTimeout(showPopup, popupDelay);
-
-        // Hide popup when close button is clicked
         if (closeButton) {
             closeButton.addEventListener('click', () => {
-                clearTimeout(popupTimer); // Stop the timer if popup is closed manually
+                clearTimeout(popupTimer);
                 hidePopup();
             });
         }
 
-        // Hide popup when form is submitted (basic example)
-        // NOTE: This does NOT actually submit the email anywhere.
-        // You need to integrate this with a mailing list service (e.g., Mailchimp, ConvertKit).
+        // Optional: Hide popup after form submission attempt
+        // Note: Since the form submits to target="_blank", the user stays on the page.
+        // Hiding the popup immediately might be good UX.
         if (popupForm) {
-            popupForm.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevent default form submission
-                console.log('Form submitted (no backend integration). Email:', document.getElementById('popup-email').value);
-                // Add your mailing list integration code here (e.g., using Fetch API to send data)
-                alert("Thanks for signing up! Check your email for the discount code (Note: This is a demo)."); // Placeholder confirmation
-                hidePopup(); // Hide the popup after submission
+            popupForm.addEventListener('submit', () => {
+                // Hide the popup slightly after submission starts,
+                // allowing the new tab to potentially open first.
+                setTimeout(hidePopup, 300);
             });
         }
 
         // Optional: Hide popup if user clicks outside the modal content
         if (popup) {
             popup.addEventListener('click', (event) => {
-                // Check if the click is directly on the overlay background
                 if (event.target === popup) {
                     clearTimeout(popupTimer);
                     hidePopup();
                 }
             });
         }
-
     </script>
 
 </body>
