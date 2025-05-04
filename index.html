@@ -36,16 +36,7 @@
             visibility: visible;
         }
         /* Ensure video doesn't overflow its container */
-        #home video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0; /* Behind overlay and text */
+        
         }
         #home > div { /* Target direct children divs (overlay and content container) */
              position: relative;
@@ -56,16 +47,21 @@
             font-family: 'Inter', sans-serif; /* Match body font */
             /* Use Tailwind classes for consistency if possible, but inline styles are provided by Square */
         }
+         /* Style the button from Square's code */
          #popup-form button[type="submit"] {
-             font-family: 'Inter', sans-serif; /* Match body font */
-             font-weight: 500; /* Match Tailwind medium */
+             font-family: 'Inter', sans-serif !important; /* Match body font, override inline */
+             font-weight: 500 !important; /* Match Tailwind medium, override inline */
              /* Override Square's background color with Tailwind pink */
              background-color: #db2777 !important; /* Tailwind pink-600 */
              border-radius: 0.375rem !important; /* Tailwind rounded-lg */
              padding-left: 1rem !important; /* Tailwind px-4 */
              padding-right: 1rem !important; /* Tailwind px-4 */
-             height: 40px; /* Keep height */
-             transition: background-color 0.2s ease-in-out; /* Add transition */
+             height: 40px !important; /* Keep height */
+             transition: background-color 0.2s ease-in-out !important; /* Add transition */
+             border: 0 !important; /* Ensure no border */
+             color: white !important; /* Ensure text is white */
+             cursor: pointer !important; /* Ensure cursor is pointer */
+             white-space: nowrap !important; /* Prevent text wrapping */
         }
         #popup-form button[type="submit"]:hover {
              background-color: #be185d !important; /* Tailwind pink-700 */
@@ -107,14 +103,14 @@
     <main>
         <section id="home" class="relative text-white py-20 md:py-32 flex items-center justify-center text-center overflow-hidden min-h-[60vh] md:min-h-[80vh]">
             <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
-                <source src="your-video.mp4" type="video/mp4">
+                <source src="StudioPromo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
                  <div class="absolute inset-0 bg-gray-800 flex items-center justify-center">
                     <p>Background video unavailable.</p>
                  </div>
             </video>
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-            <div class="relative z-10 container mx-auto px-6">
+           	<div class="absolute inset-0 bg-black opacity-75 z-10"></div> 
+		<div class="relative z-20 container mx-auto px-6">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4">Paint with a View (and Mini Cows!)</h1>
                 <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Experience Sip 'n Graze Studio at Hillcrest Farms. Enjoy panoramic mountain views and adorable mini highland cows as you paint the sunset.</p>
                 <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-pink-500">
@@ -128,10 +124,10 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Classes & Workshops</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                        <img src="https://placehold.co/600x400/fbcfe8/4a044e?text=Wildflower+Painting" alt="Acrylic painting of colorful wildflowers in a field" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
+                        <img src="MeadowFlowers.png" alt="Acrylic painting of colorful wildflowers in a field" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2">Wildflower Meadow Painting</h3>
-                            <p class="text-gray-600 mb-4 text-sm">Sun, May 25th, 2025 | 5:45 PM - 8:45 PM</p>
+                            <p class="text-gray-600 mb-4 text-sm">Sun, May 25th, 2025 | 5:30 PM - 8:00 PM</p>
                             <p class="text-gray-700 mb-4">Paint a vibrant field of wildflowers using acrylics, inspired by the beauty around Hillcrest Farms.</p>
                             <div class="flex justify-between items-center">
                                 <span class="text-lg font-bold text-pink-600">$49.99</span>
@@ -142,7 +138,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                         <img src="https://placehold.co/600x400/f9a8d4/4a044e?text=Bee+%26+Lavender" alt="Painting of a bee on lavender flowers" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
+                         <img src="LavenderBee.jpg" alt="Painting of a bee on lavender flowers" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2">Bee & Lavender Painting</h3>
                             <p class="text-gray-600 mb-4 text-sm">Date: Coming Soon!</p>
@@ -156,7 +152,7 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                         <img src="https://placehold.co/600x400/f472b6/ffffff?text=Monstera+Plant" alt="Painting of a green Monstera plant leaf" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
+                         <img src="Monstera.jpg" alt="Painting of a green Monstera plant leaf" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2">Monstera Leaf Painting</h3>
                              <p class="text-gray-600 mb-4 text-sm">Date: Coming Soon!</p>
@@ -181,7 +177,7 @@
         <section id="about" class="py-16 md:py-24 bg-pink-50">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
-                     <img src="https://placehold.co/600x500/fce7f3/4a044e?text=Ella+or+Hillcrest+Farms" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" onerror="this.onerror=null; this.src='https://placehold.co/600x500/cccccc/333333?text=Image+Not+Found';">
+                     <img src="Ellafield.jpg" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" onerror="this.onerror=null; this.src='https://placehold.co/600x500/cccccc/333333?text=Image+Not+Found';">
                 </div>
                 <div class="md:w-1/2 text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Welcome to Sip 'n Graze Studio</h2>
@@ -202,11 +198,11 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Studio Moments & Creations</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <img src="https://placehold.co/300x300/fce7f3/4a044e?text=Art+1" alt="Student Artwork 1" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/fbcfe8/4a044e?text=Art+2" alt="Student Artwork 2" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/f9a8d4/4a044e?text=View" alt="Studio View" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/f472b6/ffffff?text=Cow" alt="Mini Highland Cow" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://placehold.co/300x300/ec4899/ffffff?text=Sunset" alt="Sunset Class" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="TylerElius.jpeg" alt="Student Artwork 1" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="FirstClass.jpeg" alt="Student Artwork 2" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="Farm.jpeg" alt="Studio View" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="PinkCows.jpeg" alt="Mini Highland Cow" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
+                    <img src="PaintingsSunset.jpeg" alt="Sunset Class" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
                  </div>
                  <div class="text-center mt-12">
                     <a href="#" class="text-pink-600 hover:text-pink-800 font-medium text-lg">
@@ -277,7 +273,7 @@
             <form id="popup-form" action="https://squareup.com/outreach/a7GYiX/subscribe" method="POST" target="_blank" class="flex flex-col sm:flex-row items-center justify-center gap-2">
                 <input type="email" name="email_address" placeholder="Your Email Address" required style="height: 40px; padding: 0 16px; font-size: 14px; border: 1px solid #bec3c8; border-radius: 3px; flex-grow: 1; font-family: 'Inter', sans-serif;">
                 <input type="hidden" name="embed" value="true">
-                <button type="submit" style="cursor: pointer; background-color: #546476; color: white; height: 40px; border: 0; border-radius: 3px; font-size: 14px; padding: 0 16px; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-weight: 500; white-space: nowrap;">Join Now</button>
+                <button type="submit" style="cursor: pointer; background-color: #546476; color: white; height: 40px; border: 0; border-radius: 3px; font-size: 14px; padding: 0 16px; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-weight: 500; white-space: nowrap;">20% Off</button>
             </form>
             <p class="text-xs text-gray-500 text-center mt-4">We respect your privacy. Unsubscribe anytime.</p>
         </div>
@@ -315,33 +311,37 @@
         };
         const hidePopup = () => {
             popup.classList.add('hidden');
+            // Optionally set the flag even if submission happens in new tab
             localStorage.setItem(popupShownKey, 'true');
         };
-        const popupDelay = 5000;
+        const popupDelay = 5000; // 5 seconds
         const popupTimer = setTimeout(showPopup, popupDelay);
+
+        // Close popup with button
         if (closeButton) {
             closeButton.addEventListener('click', () => {
-                clearTimeout(popupTimer);
+                clearTimeout(popupTimer); // Stop timer if closed manually
                 hidePopup();
             });
         }
 
-        // Optional: Hide popup after form submission attempt
-        // Note: Since the form submits to target="_blank", the user stays on the page.
-        // Hiding the popup immediately might be good UX.
+        // Hide popup after form submission attempt
         if (popupForm) {
             popupForm.addEventListener('submit', () => {
                 // Hide the popup slightly after submission starts,
                 // allowing the new tab to potentially open first.
+                // This improves the perceived flow.
                 setTimeout(hidePopup, 300);
+                // No preventDefault() here - let the form submit normally with target="_blank"
             });
         }
 
-        // Optional: Hide popup if user clicks outside the modal content
+        // Hide popup if user clicks outside the modal content
         if (popup) {
             popup.addEventListener('click', (event) => {
+                // Check if the click is directly on the overlay background
                 if (event.target === popup) {
-                    clearTimeout(popupTimer);
+                    clearTimeout(popupTimer); // Stop timer if closed by clicking outside
                     hidePopup();
                 }
             });
