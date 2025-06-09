@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sip 'n Graze Studio - Painting Classes at Hillcrest Farms</title>
     <link rel="icon" type="image/png" href="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/5b121f72-b050-4966-a83c-63973c8a8e00/favicon">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 
+        For production, it's recommended to compile and purge your Tailwind CSS
+        to a local file. Using the CDN script below for development and previewing.
+    -->
+    <link rel="stylesheet" href="/output2.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,6 +17,7 @@
         /* Apply Inter font */
         body {
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* For smooth scrolling to sections */
         }
         /* Add a subtle transition for hover effects */
         a, button {
@@ -36,45 +41,79 @@
             opacity: 1;
             visibility: visible;
         }
-        /* Ensure video doesn't overflow its container */
         
-        }
         #home > div { /* Target direct children divs (overlay and content container) */
-             position: relative;
-             z-index: 1; /* Ensure overlay and text are above video */
+            position: relative;
+            z-index: 1; /* Ensure overlay and text are above video */
         }
         /* Style adjustments for Square form elements to fit theme */
         #popup-form input[type="email"] {
             font-family: 'Inter', sans-serif; /* Match body font */
-            /* Use Tailwind classes for consistency if possible, but inline styles are provided by Square */
         }
-         /* Style the button from Square's code */
-         #popup-form button[type="submit"] {
-             font-family: 'Inter', sans-serif !important; /* Match body font, override inline */
-             font-weight: 500 !important; /* Match Tailwind medium, override inline */
-             /* Override Square's background color with Tailwind pink */
-             background-color: #db2777 !important; /* Tailwind pink-600 */
-             border-radius: 0.375rem !important; /* Tailwind rounded-lg */
-             padding-left: 1rem !important; /* Tailwind px-4 */
-             padding-right: 1rem !important; /* Tailwind px-4 */
-             height: 40px !important; /* Keep height */
-             transition: background-color 0.2s ease-in-out !important; /* Add transition */
-             border: 0 !important; /* Ensure no border */
-             color: white !important; /* Ensure text is white */
-             cursor: pointer !important; /* Ensure cursor is pointer */
-             white-space: nowrap !important; /* Prevent text wrapping */
+        #popup-form button[type="submit"] {
+            font-family: 'Inter', sans-serif !important; 
+            font-weight: 500 !important; 
+            background-color: #db2777 !important; /* Tailwind pink-600 */
+            border-radius: 0.375rem !important; 
+            padding-left: 1rem !important; 
+            padding-right: 1rem !important; 
+            height: 40px !important; 
+            transition: background-color 0.2s ease-in-out !important; 
+            border: 0 !important; 
+            color: white !important; 
+            cursor: pointer !important; 
+            white-space: nowrap !important; 
         }
         #popup-form button[type="submit"]:hover {
-             background-color: #be185d !important; /* Tailwind pink-700 */
+            background-color: #be185d !important; /* Tailwind pink-700 */
         }
 
+        /* Styling for new FAQ dropdown */
+        .faq-item {
+            background-color: white;
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-bottom: 0.75rem; /* mb-3 */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .faq-item[open] {
+            background-color: #fffbeb; /* yellow-50 */
+        }
+        .faq-item summary {
+            font-weight: 600; /* font-semibold */
+            color: #1f2937; /* text-gray-800 */
+            padding: 1rem; /* p-4 */
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none; /* Hide for Chrome/Safari */
+        }
+        .faq-item summary::after { /* Custom dropdown arrow */
+            content: '+';
+            font-size: 1.5rem;
+            color: #db2777; /* text-pink-600 */
+            transition: transform 0.2s ease-in-out;
+        }
+        .faq-item[open] summary::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 1rem 1rem 1rem;
+            color: #4b5563; /* text-gray-700 */
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-pink-600 hover:text-pink-800">Sip 'n Graze Studio</a>
+            <a href="#home" class="text-2xl font-bold text-pink-600 hover:text-pink-800">Sip 'n Graze Studio</a>
             <div class="hidden md:flex space-x-6">
                 <a href="#home" class="text-gray-600 hover:text-pink-600">Home</a>
                 <a href="#classes" class="text-gray-600 hover:text-pink-600">Classes</a>
@@ -92,28 +131,28 @@
             </button>
         </nav>
         <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
-             <a href="#home" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Home</a>
-             <a href="#classes" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Classes</a>
-             <a href="#about" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">About</a>
-             <a href="#gallery" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Gallery</a>
-             <a href="#contact" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Contact</a>
-             <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="block px-6 py-3 bg-pink-50 text-pink-700 font-medium hover:bg-pink-100">Book a Class</a>
+            <a href="#home" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Home</a>
+            <a href="#classes" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Classes</a>
+            <a href="#about" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">About</a>
+            <a href="#gallery" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Gallery</a>
+            <a href="#contact" class="block px-6 py-3 text-gray-600 hover:bg-gray-100 hover:text-pink-600">Contact</a>
+            <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="block px-6 py-3 bg-pink-50 text-pink-700 font-medium hover:bg-pink-100">Book a Class</a>
         </div>
     </header>
 
     <main>
-       <section id="home" class="relative text-white py-20 md:py-32 flex items-center justify-center text-center overflow-hidden min-h-[60vh] md:min-h-[80vh]">
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden;">
-        <iframe
-          src="https://customer-th5qi16x0vuotezo.cloudflarestream.com/6d19b39e68faff4a482451024fc1a70e/iframe?muted=true&preload=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-th5qi16x0vuotezo.cloudflarestream.com%2F6d19b39e68faff4a482451024fc1a70e%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false&videoFit=cover"
-          loading="lazy"
-          style="border: none; position: absolute; top: 50%; left: 50%; width: 177.77vh; /* 16/9 aspect ratio, scaled by viewport height */ min-width: 100vw; height: 100vw; /* 9/16 aspect ratio, scaled by viewport width */ min-height: 100vh; transform: translateX(-50%) translateY(-50%); pointer-events: none;" /* Aggressive cover CSS */
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-          allowfullscreen="true"
-        ></iframe>
-    </div>
-            <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
-            <div class="relative z-20 container mx-auto px-6">
+        <section id="home" class="relative text-white py-20 md:py-32 flex items-center justify-center text-center overflow-hidden min-h-[60vh] md:min-h-[80vh]">
+            <!-- Video Background (z-0) -->
+            <video 
+                id="background-video" 
+                playsinline autoplay muted loop 
+                poster="https://customer-th5qi16x0vuotezo.cloudflarestream.com/6d19b39e68faff4a482451024fc1a70e/thumbnails/thumbnail.jpg?time=%26height%3D600" 
+                class="absolute inset-0 w-full h-full object-cover z-0">
+            </video>
+            <!-- Dimming Overlay (z-10) -->
+            <div class="absolute inset-0 bg-black opacity-75 z-10"></div>
+            <!-- Content (z-20) -->
+            <div class="relative z-20 container mx-auto px-6"> 
                 <h1 class="text-4xl md:text-6xl font-bold mb-4">Paint with a View (and Mini Cows!)</h1>
                 <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Experience Sip 'n Graze Studio at Hillcrest Farms. Enjoy panoramic mountain views and adorable mini highland cows as you paint and watch the sunset.</p>
                 <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-pink-500">
@@ -126,13 +165,14 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Upcoming Classes & Workshops</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                        <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/e4fc9c88-d219-44e4-7c6e-b3cb50b38200/public" alt="Acrylic painting of colorful wildflowers in a field" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Wildflower Meadow Painting</h3>
-                            <p class="text-gray-600 mb-4 text-sm">Sun, May 25th, 2025 | 5:30 PM - 8:00 PM</p>
-                            <p class="text-gray-700 mb-4">Paint a vibrant field of wildflowers using acrylics, inspired by the beauty around Hillcrest Farms.</p>
-                            <div class="flex justify-between items-center">
+                    <!-- Class Card 1: June 29 -->
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
+                        <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/ce2fb930-248f-493b-b4a8-0987e050a800/public" alt="Whimsical painting of a black cat in a colorful flower garden" class="w-full h-48 object-cover" width="288" height="192">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold mb-2 class-title">Whimsical Garden Cat</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Sun, June 29th, 2025 | 5:30 PM - 8:00 PM</p>
+                            <p class="text-gray-700 mb-4 class-description flex-grow">Create a charming and colorful masterpiece featuring a playful cat nestled amongst whimsical flowers.</p>
+                            <div class="mt-auto flex justify-between items-center">
                                 <span class="text-lg font-bold text-pink-600">$49.99</span>
                                 <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                     Register Now
@@ -140,13 +180,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                         <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/36b35654-c4df-4881-8897-8ba3988e4400/public" alt="Painting of a bee on lavender flowers" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Bee & Lavender Painting</h3>
-                            <p class="text-gray-600 mb-4 text-sm">Sun, June 8th, 2025 | 5:30 PM - 8:00 PM</p>
-                            <p class="text-gray-700 mb-4">Capture the charm of summer with this delightful bee and lavender painting class.</p>
-                            <div class="flex justify-between items-center">
+                    <!-- Class Card 2: July 20 -->
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
+                        <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/b4b18e44-5131-4bed-2b10-600c57f62100/public" alt="Vibrant painting of a field of red poppies" class="w-full h-48 object-cover" width="288" height="192">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold mb-2 class-title">Vibrant Poppy Field</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Sun, July 20th, 2025 | 5:30 PM - 8:00 PM</p>
+                            <p class="text-gray-700 mb-4 class-description flex-grow">Paint a stunning field of vibrant red poppies, capturing the simple beauty of summer in the countryside.</p>
+                            <div class="mt-auto flex justify-between items-center">
                                 <span class="text-lg font-bold text-pink-600">$49.99</span>
                                 <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                     Register Now
@@ -154,13 +195,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                         <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/74821479-5169-4dbb-40aa-2fd63548a500/public" alt="Painting of a green Monstera plant leaf" class="w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/cccccc/333333?text=Image+Not+Found';">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Monstera Leaf Painting</h3>
-                             <p class="text-gray-600 mb-4 text-sm">Sun, June 29th, 2025 | 5:30 PM - 8:00 PM</p>
-                             <p class="text-gray-700 mb-4">Learn to paint the iconic, lush leaves of a Monstera plant in this relaxing session.</p>
-                             <div class="flex justify-between items-center">
+                    <!-- Class Card 3: August 10 -->
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
+                        <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/2049ab72-bece-4bfa-61fd-a8ea3ba26800/public" alt="Painting of glowing lanterns floating in a night sky" class="w-full h-48 object-cover" width="288" height="192">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold mb-2 class-title">Magical Lantern Night</h3>
+                            <p class="text-gray-600 mb-4 text-sm">Sun, August 10th, 2025 | 5:30 PM - 8:00 PM</p>
+                            <p class="text-gray-700 mb-4 class-description flex-grow">Capture the magic of a peaceful night sky filled with glowing lanterns in this enchanting painting class.</p>
+                            <div class="mt-auto flex justify-between items-center">
                                 <span class="text-lg font-bold text-pink-600">$49.99</span>
                                 <a href="https://app.squareup.com/appointments/book/classes/m5a6jw426dp3ru/L82E1APHS8NQG/classes" target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                     Register Now
@@ -180,7 +222,7 @@
         <section id="about" class="py-16 md:py-24 bg-pink-50">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
-                     <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/7e613ae2-df87-45fd-8fe2-e3c6167f7500/public" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" onerror="this.onerror=null; this.src='https://placehold.co/600x500/cccccc/333333?text=Image+Not+Found';">
+                    <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/7e613ae2-df87-45fd-8fe2-e3c6167f7500/public" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" width="600" height="450" onerror="this.onerror=null; this.src='https://placehold.co/600x450/cccccc/333333?text=Image+Not+Found';">
                 </div>
                 <div class="md:w-1/2 text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Welcome to Sip 'n Graze Studio</h2>
@@ -190,8 +232,57 @@
                     <p class="text-gray-700 mb-8 leading-relaxed">
                         Our classes, often timed with the sunset, provide a relaxing and inspiring atmosphere for all skill levels. Join us for an unforgettable artistic adventure.
                     </p>
-                    <a href="#" class="inline-block bg-white text-pink-600 px-6 py-3 rounded-lg font-medium border border-pink-200 hover:bg-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-pink-50 focus:ring-pink-500">
+                    <a href="#about-detailed" class="inline-block bg-white text-pink-600 px-6 py-3 rounded-lg font-medium border border-pink-200 hover:bg-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-pink-50 focus:ring-pink-500">
                         Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-detailed" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-pink-700">Our Story & Vision</h2>
+                <div class="space-y-12 md:space-y-16">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="md:order-1"> 
+                            <h3 class="text-2xl font-semibold mb-4">Meet Ella Roesner, Your Guide to Creativity</h3>
+                            <p class="text-gray-700 mb-4 leading-relaxed">
+                                Ella is a passionate local artist with a love for nature and a knack for teaching. She believes everyone has an inner artist waiting to be discovered. Her friendly and encouraging approach makes painting accessible and enjoyable, whether you're picking up a brush for the first time or looking to refine your skills.
+                            </p>
+                            <p class="text-gray-700 mb-4 leading-relaxed">
+                                "I started Sip 'n Graze Studio to combine my two passions: art and the serene beauty of Hillcrest Farms. There's something magical about creating art while surrounded by nature, especially with our charming mini highland cows as your audience!"
+                            </p>
+                        </div>
+                        <div class="md:order-2"> 
+                            <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/cebf30c1-2fb9-4ace-49b1-3266d96f6f00/public" alt="Artist Ella Roesner teaching a class" class="rounded-lg shadow-md w-full h-auto md:h-[400px] object-cover" width="600" height="400">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="md:order-2"> 
+                            <h3 class="text-2xl font-semibold mb-4">The Sip 'n Graze Experience at Hillcrest Farms</h3>
+                            <p class="text-gray-700 mb-4 leading-relaxed">
+                                Hillcrest Farms isn't just a venue; it's an escape. Nestled in Clinton, TN, it offers breathtaking panoramic views that evolve with the seasons. Our studio space is designed to maximize your connection with this stunning environment.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                                <li><strong>Inspiring Views:</strong> Paint against a backdrop of rolling hills and stunning sunsets.</li>
+                                <li><strong>Miniature Highland Cows:</strong> Our adorable and friendly mini cows often graze nearby, adding a unique and delightful touch to your experience. They're quite the models!</li>
+                                <li><strong>Relaxed Atmosphere:</strong> We foster a no-pressure, fun environment. Sip on your favorite beverage (BYOB options often available), chat with fellow painters, and let your creativity flow.</li>
+                                <li><strong>All-Inclusive Classes:</strong> We provide all the necessary art supplies – canvases, paints, brushes, aprons – you just bring yourself and your enthusiasm.</li>
+                            </ul>
+                        </div>
+                        <div class="md:order-1"> 
+                            <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/deaede97-923a-4ea5-9242-af41e93d5d00/public" alt="Panoramic view from Hillcrest Farms with mini cows" class="rounded-lg shadow-md w-full h-auto md:h-[400px] object-cover" width="600" height="400">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 md:mt-16 text-center">
+                    <h3 class="text-2xl font-semibold mb-4">Perfect for Any Occasion</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed max-w-3xl mx-auto">
+                        Beyond our scheduled public classes, Sip 'n Graze Studio is the perfect venue for private parties, corporate team-building events, bridal showers, birthday celebrations, and more. We can customize the painting theme and experience to suit your group's needs.
+                    </p>
+                    <a href="#contact" class="bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                        Inquire About Private Events
                     </a>
                 </div>
             </div>
@@ -199,33 +290,78 @@
 
         <section id="gallery" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Studio Moments & Creations</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/c61bc977-75bf-4f9e-aafe-fc7061ad9600/public" alt="Student Artwork 1" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/3d96a742-1ac5-4bc8-4904-9002b867f400/public" alt="Student Artwork 2" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/e02e83b4-6d31-4b93-6981-ce9809913f00/public" alt="Studio View" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/16fd80a6-f33f-45d6-0913-87a087d80800/public" alt="Mini Highland Cow" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                    <img src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/5914d964-a9ce-45b8-c13d-a654d5bf6800/public" alt="Sunset Class" class="rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='https://placehold.co/300x300/cccccc/333333?text=Image+Not+Found';">
-                 </div>
-                 <div class="text-center mt-12">
-                    <a href="#" class="text-pink-600 hover:text-pink-800 font-medium text-lg">
-                        View Full Gallery &rarr;
-                    </a>
-                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-pink-700">A Canvas of Memories</h2>
+                <div class="embedsocial-hashtag" data-ref="621fc66ffda99c6fd799646fe146e4d0e238c403"> <a class="feed-powered-by-es feed-powered-by-es-slider-img es-widget-branding" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget"> <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial"> <div class="es-widget-branding-text">Instagram widget</div> </a> </div> <script> (function(d, s, id) { var js; if (d.getElementById(id)) {return;} js = d.createElement(s); js.id = id; js.src = "https://embedsocial.com/cdn/ht.js"; d.getElementsByTagName("head")[0].appendChild(js); }(document, "script", "EmbedSocialHashtagScript")); </script>
             </div>
         </section>
 
         <section id="contact" class="py-16 md:py-24 bg-gray-100">
-             <div class="container mx-auto px-6 text-center">
-                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
-                 <p class="text-gray-700 mb-8 max-w-xl mx-auto">Have questions about our classes or want to book a private event at Hillcrest Farms? Reach out!</p>
-                 <p class="text-lg font-medium mb-8">
-                     <a href="mailto:hey@sipngrazestudio.com" class="hover:text-pink-600">hey@sipngrazestudio.com</a>
-                 </p>
-                 <a href="mailto:hey@sipngrazestudio.com" class="inline-block bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-pink-500">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Get In Touch</h2>
+                <p class="text-gray-700 mb-8 max-w-xl mx-auto">Have questions about our classes or want to book a private event at Hillcrest Farms? Reach out!</p>
+                <p class="text-lg font-medium mb-8">
+                    <a href="mailto:hey@sipngrazestudio.com" class="hover:text-pink-600">hey@sipngrazestudio.com</a>
+                </p>
+                <a href="mailto:hey@sipngrazestudio.com" class="inline-block bg-pink-600 text-white px-8 py-3 rounded-lg font-medium text-lg hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-pink-500">
                     Email Us
-                 </a>
-             </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="faq" class="py-16 md:py-24 bg-pink-50">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-pink-700">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <details class="faq-item group">
+                        <summary>
+                            <span>What is included in the class price?</span>
+                        </summary>
+                        <div class="faq-answer">
+                            Everything you need to create your masterpiece! This includes a canvas, paints, brushes, and 2.5 hours of guided instruction from our artist.
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary>
+                            <span>Do I need any painting experience?</span>
+                        </summary>
+                        <div class="faq-answer">
+                            Absolutely not! Our classes are designed for all skill levels, from complete beginners to more experienced painters. Our friendly instructor will guide you step-by-step through the entire process, ensuring you feel confident and have fun.
+                        </div>
+                    </details>
+                     <details class="faq-item group">
+                        <summary>
+                            <span>Can I bring my own drinks or snacks?</span>
+                        </summary>
+                        <div class="faq-answer">
+                            Yes, please bring your favorite beverages (the "Sip")! We provide complimentary charcuterie boards (the "Graze") for you to enjoy while you paint. Please check class descriptions for any specific notes on alcohol for all-ages events.
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary>
+                            <span>Will we really see the mini highland cows?</span>
+                        </summary>
+                        <div class="faq-answer">
+                            Yes! Our studio is located at the beautiful Hillcrest Farms, which is home to a herd of adorable and friendly mini highland cows. They often graze nearby, providing a unique and charming backdrop for your painting experience. While we can't guarantee they'll pose for your painting, they are almost always part of the scenery!
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary>
+                            <span>What should I wear?</span>
+                        </summary>
+                        <div class="faq-answer">
+                           We highly recommend wearing comfortable clothes that you don't mind getting a little paint on. <strong>We do not provide aprons</strong>, and acrylic paint can be tricky to remove from fabric once it dries, so it's best to dress for the mess!
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary>
+                            <span>What is your cancellation policy?</span>
+                        </summary>
+                        <div class="faq-answer">
+                            We understand that plans can change. For a full refund, please cancel at least 48 hours before your scheduled class time. Cancellations made within 48 hours of the class may receive a credit to be used for a future class. Please refer to your booking confirmation for specific details and contact us directly for any changes.
+                        </div>
+                    </details>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -244,7 +380,8 @@
                         <li><a href="#about" class="hover:text-white">About Us</a></li>
                         <li><a href="#gallery" class="hover:text-white">Gallery</a></li>
                         <li><a href="#contact" class="hover:text-white">Contact</a></li>
-                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li> </ul>
+                        <li><a href="privacy-policy.html" class="hover:text-white" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li> 
+                    </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
@@ -252,6 +389,11 @@
                         <a href="https://www.instagram.com/looberry_co" target="_blank" rel="noopener noreferrer" class="hover:text-white social-icon" aria-label="Instagram">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                 <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/people/Looberry-Co/61575751116257/" target="_blank" rel="noopener noreferrer" class="hover:text-white social-icon" aria-label="Facebook">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/>
                             </svg>
                         </a>
                     </div>
@@ -282,7 +424,8 @@
         </div>
     </div>
 
-    <script>
+    <script> 
+    document.addEventListener('DOMContentLoaded', () => {
         // --- Mobile Menu Toggle ---
         const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -292,11 +435,12 @@
             });
             const mobileLinks = mobileMenu.querySelectorAll('a');
             mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (link.getAttribute('href').startsWith('#')) {
-                         mobileMenu.classList.add('hidden');
+                link.addEventListener('click', (e) => { 
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        mobileMenu.classList.add('hidden');
                     } else {
-                         mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.add('hidden');
                     }
                 });
             });
@@ -305,50 +449,66 @@
         // --- Mailing List Popup Logic ---
         const popup = document.getElementById('mailing-list-popup');
         const closeButton = document.getElementById('close-popup-button');
-        const popupForm = document.getElementById('popup-form'); // Reference to the new form
+        const popupForm = document.getElementById('popup-form');
         const popupShownKey = 'sipAndGrazePopupShown';
-        const showPopup = () => {
-            if (!localStorage.getItem(popupShownKey)) {
-                popup.classList.remove('hidden');
-            }
-        };
-        const hidePopup = () => {
-            popup.classList.add('hidden');
-            // Optionally set the flag even if submission happens in new tab
-            localStorage.setItem(popupShownKey, 'true');
-        };
-        const popupDelay = 5000; // 5 seconds
-        const popupTimer = setTimeout(showPopup, popupDelay);
 
-        // Close popup with button
-        if (closeButton) {
-            closeButton.addEventListener('click', () => {
-                clearTimeout(popupTimer); // Stop timer if closed manually
-                hidePopup();
-            });
-        }
-
-        // Hide popup after form submission attempt
-        if (popupForm) {
-            popupForm.addEventListener('submit', () => {
-                // Hide the popup slightly after submission starts,
-                // allowing the new tab to potentially open first.
-                // This improves the perceived flow.
-                setTimeout(hidePopup, 300);
-                // No preventDefault() here - let the form submit normally with target="_blank"
-            });
-        }
-
-        // Hide popup if user clicks outside the modal content
         if (popup) {
+            const showPopup = () => {
+                if (!localStorage.getItem(popupShownKey)) { 
+                    popup.classList.remove('hidden');
+                }
+            };
+            const hidePopup = () => {
+                popup.classList.add('hidden');
+                localStorage.setItem(popupShownKey, 'true');
+            };
+            const popupDelay = 5000; 
+            let popupTimer = setTimeout(showPopup, popupDelay);
+            
+            if (closeButton) {
+                closeButton.addEventListener('click', () => {
+                    if (popupTimer) clearTimeout(popupTimer);
+                    hidePopup();
+                });
+            }
+
+            if (popupForm) {
+                popupForm.addEventListener('submit', () => {
+                    setTimeout(hidePopup, 300); 
+                });
+            }
+
             popup.addEventListener('click', (event) => {
-                // Check if the click is directly on the overlay background
-                if (event.target === popup) {
-                    clearTimeout(popupTimer); // Stop timer if closed by clicking outside
+                if (event.target === popup) { 
+                    if (popupTimer) clearTimeout(popupTimer);
                     hidePopup();
                 }
             });
         }
+    }); // End of DOMContentLoaded listener
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var video = document.getElementById('background-video');
+      var hlsUrl = 'https://customer-th5qi16x0vuotezo.cloudflarestream.com/6d19b39e68faff4a482451024fc1a70e/manifest/video.m3u8'; 
+
+      if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(hlsUrl);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          video.play();
+        });
+      }
+      // HLS.js is not supported on platforms like iOS Safari where HLS is supported natively.
+      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = hlsUrl;
+        video.addEventListener('loadedmetadata', function () {
+          video.play();
+        });
+      }
+    });
     </script>
 
 </body>
