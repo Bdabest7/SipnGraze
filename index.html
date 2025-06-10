@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sip 'n Graze Studio - Painting Classes at Hillcrest Farms</title>
+    <meta name="description" content="Unleash your creativity at Sip 'n Graze Studio! Join our painting classes at the scenic Hillcrest Farms, surrounded by mini highland cows. Perfect for all skill levels.">
     <link rel="icon" type="image/png" href="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/5b121f72-b050-4966-a83c-63973c8a8e00/favicon">
-    <!-- 
-        For production, it's recommended to compile and purge your Tailwind CSS
-        to a local file. Using the CDN script below for development and previewing.
-    -->
+    
+    <!-- Preload the LCP image (video poster) for faster initial paint -->
+    <link rel="preload" as="image" href="https://customer-th5qi16x0vuotezo.cloudflarestream.com/6d19b39e68faff4a482451024fc1a70e/thumbnails/thumbnail.jpg?time=%26height%3D600">
+    
+    <!-- Using Tailwind CDN for development and previewing. -->
     <link rel="stylesheet" href="/output2.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -167,7 +170,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Class Card 1: June 29 -->
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
-                        <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/ce2fb930-248f-493b-b4a8-0987e050a800/public" alt="Whimsical painting of a black cat in a colorful flower garden" class="w-full h-48 object-cover" width="288" height="192">
+                        <img 
+                            loading="lazy" 
+                            src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/ce2fb930-248f-493b-b4a8-0987e050a800/public" 
+                            alt="Whimsical painting of a black cat in a colorful flower garden" 
+                            class="w-full h-48 object-cover" width="288" height="192">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-semibold mb-2 class-title">Whimsical Garden Cat</h3>
                             <p class="text-gray-600 mb-4 text-sm">Sun, June 29th, 2025 | 5:30 PM - 8:00 PM</p>
@@ -182,7 +189,11 @@
                     </div>
                     <!-- Class Card 2: July 20 -->
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
-                        <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/b4b18e44-5131-4bed-2b10-600c57f62100/public" alt="Vibrant painting of a field of red poppies" class="w-full h-48 object-cover" width="288" height="192">
+                        <img 
+                            loading="lazy" 
+                            src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/b4b18e44-5131-4bed-2b10-600c57f62100/public" 
+                            alt="Vibrant painting of a field of red poppies" 
+                            class="w-full h-48 object-cover" width="288" height="192">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-semibold mb-2 class-title">Vibrant Poppy Field</h3>
                             <p class="text-gray-600 mb-4 text-sm">Sun, July 20th, 2025 | 5:30 PM - 8:00 PM</p>
@@ -197,7 +208,11 @@
                     </div>
                     <!-- Class Card 3: August 10 -->
                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col">
-                        <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/2049ab72-bece-4bfa-61fd-a8ea3ba26800/public" alt="Painting of glowing lanterns floating in a night sky" class="w-full h-48 object-cover" width="288" height="192">
+                        <img 
+                            loading="lazy"
+                            src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/2049ab72-bece-4bfa-61fd-a8ea3ba26800/public" 
+                            alt="Painting of glowing lanterns floating in a night sky" 
+                            class="w-full h-48 object-cover" width="288" height="192">
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-semibold mb-2 class-title">Magical Lantern Night</h3>
                             <p class="text-gray-600 mb-4 text-sm">Sun, August 10th, 2025 | 5:30 PM - 8:00 PM</p>
@@ -222,7 +237,7 @@
         <section id="about" class="py-16 md:py-24 bg-pink-50">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2">
-                    <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/7e613ae2-df87-45fd-8fe2-e3c6167f7500/public" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" width="600" height="450" onerror="this.onerror=null; this.src='https://placehold.co/600x450/cccccc/333333?text=Image+Not+Found';">
+                    <img loading="lazy" src="https://imagedelivery.net/60ZF2tZWddEhvVgEMVybGw/7e613ae2-df87-45fd-8fe2-e3c6167f7500/public" alt="About Sip 'n Graze Studio" class="rounded-lg shadow-lg w-full" width="600" height="450">
                 </div>
                 <div class="md:w-1/2 text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Welcome to Sip 'n Graze Studio</h2>
@@ -291,7 +306,7 @@
         <section id="gallery" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-pink-700">A Canvas of Memories</h2>
-                <div class="embedsocial-hashtag" data-ref="621fc66ffda99c6fd799646fe146e4d0e238c403"> <a class="feed-powered-by-es feed-powered-by-es-slider-img es-widget-branding" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget"> <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial"> <div class="es-widget-branding-text">Instagram widget</div> </a> </div> <script> (function(d, s, id) { var js; if (d.getElementById(id)) {return;} js = d.createElement(s); js.id = id; js.src = "https://embedsocial.com/cdn/ht.js"; d.getElementsByTagName("head")[0].appendChild(js); }(document, "script", "EmbedSocialHashtagScript")); </script>
+                <div class="embedsocial-hashtag" data-ref="621fc66ffda99c6fd799646fe146e4d0e238c403"> <a class="feed-powered-by-es feed-powered-by-es-slider-img es-widget-branding" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget"> <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial"> <div class="es-widget-branding-text">Instagram widget</div> </a> </div> <script src="https://embedsocial.com/cdn/ht.js" id="EmbedSocialHashtagScript"></script>
             </div>
         </section>
 
